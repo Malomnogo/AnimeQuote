@@ -14,6 +14,12 @@ class ScenarioTest {
     @get:Rule
     var activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
+    /**
+     * to run the test select
+     * @see com.malomnogo.animequote.core.MockApp
+     * in AndroidManifest.xml
+     */
+
     @Test
     fun scenarioTest() {
         val initialPage = InitialPage()
