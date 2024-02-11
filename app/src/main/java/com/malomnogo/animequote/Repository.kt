@@ -4,7 +4,7 @@ import java.net.UnknownHostException
 
 interface Repository {
 
-    suspend fun saveJoke(text: String)
+    suspend fun saveQuote(text: String)
     suspend fun loadData(): LoadResult
 
     class Base(
@@ -23,30 +23,24 @@ interface Repository {
                 LoadResult.Error("Service unavailable")
         }
 
-        override suspend fun saveJoke(text: String) {
+        override suspend fun saveQuote(text: String) {
             cacheDataSource.saveQuote(value = text)
         }
     }
 
-    abstract class AbstractFake(private val cacheDataSource: CacheDataSource.Mutable) :
-        Repository {
+    class FakeErrorThenTwiceSuccessThenError(
+        private val cacheDataSource: CacheDataSource.Mutable
+    ) : Repository {
 
-        override suspend fun saveJoke(text: String) {
+        private var position = 0
+
+        override suspend fun saveQuote(text: String) {
             cacheDataSource.saveQuote(text)
         }
-    }
 
-    class FakeSuccessAfterError(cacheDataSource: CacheDataSource.Mutable) :
-        AbstractFake(cacheDataSource) {
-
-        private var isLoaded = false
-
-        override suspend fun loadData(): LoadResult {
-            val result = if (isLoaded) LoadResult.Success(quote = "It's a great funny joke")
+        override suspend fun loadData() =
+            if (position in 1..2) LoadResult.Success(quote = "Fake quote text $position")
             else LoadResult.Error(message = "No internet connection")
-            isLoaded = true
-            return result
-        }
     }
 
 }
