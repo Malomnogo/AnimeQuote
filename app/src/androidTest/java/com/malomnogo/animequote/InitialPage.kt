@@ -8,6 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.not
 
@@ -22,6 +23,6 @@ class InitialPage : AbstractPage() {
                 withParent(withId(R.id.rootLayout)),
                 withParent(isAssignableFrom(FrameLayout::class.java))
             )
-        ).check(matches(not(isDisplayed())))
+        ).check(matches(withText("")))
     }
 }

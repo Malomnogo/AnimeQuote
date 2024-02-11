@@ -65,5 +65,4 @@ interface ProvideViewModel {
             } as T
         }
     }
-
 }

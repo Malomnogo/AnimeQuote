@@ -1,5 +1,6 @@
 package com.malomnogo.animequote.data
 
+import com.malomnogo.animequote.data.cache.CacheDataSource
 import com.malomnogo.animequote.data.cloud.QuoteService
 import java.net.UnknownHostException
 
@@ -39,9 +40,13 @@ interface Repository {
             cacheDataSource.saveQuote(text)
         }
 
-        override suspend fun loadData() =
-            if (position in 1..2) LoadResult.Success(quote = "Fake quote text $position")
-            else LoadResult.Error(message = "No internet connection")
+        override suspend fun loadData(): LoadResult {
+            val result =
+                if (position in 1..2) LoadResult.Success(quote = "Fake quote text $position")
+                else LoadResult.Error(message = "No internet connection")
+            position++
+            return result
+        }
     }
 
 }

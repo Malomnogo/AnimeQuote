@@ -45,14 +45,13 @@ class MainViewModelTest {
         assertEquals(listOf(uiCallback), observable.observers)
 
         viewModel.stopGettingUpdates()
-        assertEquals(listOf(QuoteUiState.Empty), observable.observers)
+        assertEquals(listOf(uiCallback, UpdateUi.Empty), observable.observers)
     }
 
     @Test
     fun testNotFirstRun() {
         viewModel.init(isFirstOpen = false)
         assertEquals(emptyList<QuoteUiState>(), observable.states)
-        assertEquals(QuoteUiState.Empty, observable.observers)
     }
 
     @Test
@@ -115,6 +114,7 @@ class FakeUiObservable : UiObservable {
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 class FakeRunAsync : RunAsync {
 
     private var cachedUiBlock: (Any) -> Unit = {}
