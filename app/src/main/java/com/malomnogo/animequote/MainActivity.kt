@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), ProvideViewModel {
 
 interface UiCallBack {
 
-    fun update(loadUiState: QuoteUiState)
+    fun update(uiState: QuoteUiState)
 
     object Empty : UiCallBack {
 
