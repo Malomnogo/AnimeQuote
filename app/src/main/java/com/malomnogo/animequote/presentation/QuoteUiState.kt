@@ -1,7 +1,8 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.presentation
 
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.malomnogo.animequote.R
 import com.malomnogo.animequote.databinding.ActivityMainBinding
 
 interface QuoteUiState {

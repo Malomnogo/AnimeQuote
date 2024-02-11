@@ -4,7 +4,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:freezesText="true"
         android:gravity="center"
         android:paddingHorizontal="@dimen/default_space"
         tools:text="Quote Text" />

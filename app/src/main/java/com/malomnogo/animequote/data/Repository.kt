@@ -1,5 +1,6 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.data
 
+import com.malomnogo.animequote.data.cloud.QuoteService
 import java.net.UnknownHostException
 
 interface Repository {

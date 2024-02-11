@@ -1,4 +1,4 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.presentation
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope

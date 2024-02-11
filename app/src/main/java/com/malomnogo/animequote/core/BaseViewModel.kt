@@ -1,6 +1,7 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.core
 
 import androidx.lifecycle.ViewModel
+import com.malomnogo.animequote.presentation.RunAsync
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

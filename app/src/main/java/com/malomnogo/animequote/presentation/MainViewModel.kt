@@ -1,4 +1,7 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.presentation
+
+import com.malomnogo.animequote.data.Repository
+import com.malomnogo.animequote.core.BaseViewModel
 
 class MainViewModel(
     private val observable: UiObservable,
@@ -7,7 +10,7 @@ class MainViewModel(
 ) : BaseViewModel(runAsync) {
 
     fun load() {
-        observable.updateUi(UiState.Progress)
+        observable.update(QuoteUiState.Progress)
         runAsync({
             repository.loadData()
         }) { loadResult ->
@@ -15,16 +18,16 @@ class MainViewModel(
         }
     }
 
-    fun startGettingUpdates(uiCallBack: UiCallBack) {
+    fun startGettingUpdates(uiCallBack: UpdateUi) {
         observable.updateObserver(uiCallBack)
     }
 
     fun stopGettingUpdates() {
-        observable.updateObserver(UiCallBack.Empty)
+        observable.updateObserver(UpdateUi.Empty)
     }
 
     fun init(isFirstOpen: Boolean) {
-        if (isFirstOpen) observable.updateUi(UiState.Initial)
+        if (isFirstOpen) observable.update(QuoteUiState.Initial)
     }
 
 }

@@ -1,6 +1,7 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.data.cloud
 
 import com.google.gson.annotations.SerializedName
+import com.malomnogo.animequote.data.LoadResult
 
 data class QuoteResponse(
     @SerializedName("quote")

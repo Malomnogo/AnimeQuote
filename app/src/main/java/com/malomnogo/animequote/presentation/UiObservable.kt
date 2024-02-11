@@ -1,4 +1,4 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.presentation
 
 interface UiObservable : UpdateUi, UpdateObserver {
 

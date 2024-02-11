@@ -1,4 +1,4 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.core
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

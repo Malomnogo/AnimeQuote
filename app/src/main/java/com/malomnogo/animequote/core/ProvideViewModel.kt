@@ -1,9 +1,14 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.malomnogo.animequote
+package com.malomnogo.animequote.core
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.malomnogo.animequote.data.Repository
+import com.malomnogo.animequote.data.cache.CacheDataSource
+import com.malomnogo.animequote.presentation.RunAsync
+import com.malomnogo.animequote.presentation.UiObservable
+import com.malomnogo.animequote.presentation.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -48,7 +53,8 @@ interface ProvideViewModel {
         private val cacheDataSource = CacheDataSource.Base(context)
 
         private val repository =
-            Repository.Base(cacheDataSource, retrofit.create(QuoteService::class.java))
+            Repository.FakeErrorThenTwiceSuccessThenError(cacheDataSource)
+//            Repository.Base(cacheDataSource, retrofit.create(QuoteService::class.java))
 
         private val runAsync = RunAsync.Base()
 

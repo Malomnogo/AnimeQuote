@@ -1,5 +1,6 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.data.cloud
 
+import com.malomnogo.animequote.data.cloud.QuoteResponse
 import retrofit2.Call
 import retrofit2.http.GET
 

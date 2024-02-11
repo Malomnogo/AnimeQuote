@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AnimeQuote</string>
     <string name="new_quote">New Quote</string>
+    <string name="retry">Retry</string>
 </resources>

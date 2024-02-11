@@ -1,8 +1,9 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
+import com.malomnogo.animequote.core.ProvideViewModel
 import com.malomnogo.animequote.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), ProvideViewModel {

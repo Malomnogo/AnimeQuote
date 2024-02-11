@@ -1,4 +1,4 @@
-package com.malomnogo.animequote
+package com.malomnogo.animequote.data.cache
 
 import android.content.Context
 

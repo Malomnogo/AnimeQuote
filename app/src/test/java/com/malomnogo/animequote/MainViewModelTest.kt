@@ -1,5 +1,12 @@
 package com.malomnogo.animequote
 
+import com.malomnogo.animequote.data.LoadResult
+import com.malomnogo.animequote.data.Repository
+import com.malomnogo.animequote.presentation.MainViewModel
+import com.malomnogo.animequote.presentation.QuoteUiState
+import com.malomnogo.animequote.presentation.RunAsync
+import com.malomnogo.animequote.presentation.UiObservable
+import com.malomnogo.animequote.presentation.UpdateUi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -27,18 +34,18 @@ class MainViewModelTest {
 
     @Test
     fun testFirstOpen() {
-        viewModel.init(isFirtsOpen = true)
-        assertEquals(listOf(QuoteUiState.Loading), observable.states)
+        viewModel.init(isFirstOpen = true)
+        assertEquals(listOf(QuoteUiState.Initial), observable.states)
 
-        val uiCallback = object : UiCallBack {
-            override fun updateUi(uiState: QuoteUiState) = Unit
+        val uiCallback = object : UpdateUi {
+            override fun update(uiState: QuoteUiState) = Unit
         }
 
         viewModel.startGettingUpdates(uiCallback)
         assertEquals(listOf(uiCallback), observable.observers)
 
         viewModel.stopGettingUpdates()
-        assertEquals(listOf(uiCallback, QuoteUiState.Empty), observable.observers)
+        assertEquals(listOf(QuoteUiState.Empty), observable.observers)
     }
 
     @Test
@@ -73,7 +80,7 @@ class MainViewModelTest {
         assertEquals(
             listOf(
                 QuoteUiState.Progress,
-                QuoteUiState.Error(message = "Fake quote text")
+                QuoteUiState.Error(message = "No internet connection")
             ), observable.states
         )
     }
@@ -87,7 +94,7 @@ private class FakeRepository : Repository {
 
     override suspend fun loadData() = result
 
-    override suspend fun saveJoke(text: String) {
+    override suspend fun saveQuote(text: String) {
         cachedQuote = text
     }
 
@@ -96,15 +103,15 @@ private class FakeRepository : Repository {
 class FakeUiObservable : UiObservable {
 
     val states = mutableListOf<QuoteUiState>()
-    val observers = mutableListOf<QuoteUiState>()
+    val observers = mutableListOf<UpdateUi>()
 
-    override fun updateUi(uiState: QuoteUiState) {
+    override fun update(uiState: QuoteUiState) {
         states.add(uiState)
     }
 
-    override fun updateObserver(observer: UiCallBack) {
+    override fun updateObserver(observer: UpdateUi) {
         observers.add(observer)
-        updateUi(states.last())
+        update(states.last())
     }
 }
 
