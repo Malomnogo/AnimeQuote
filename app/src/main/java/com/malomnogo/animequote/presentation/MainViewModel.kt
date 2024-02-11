@@ -29,5 +29,4 @@ class MainViewModel(
     fun init(isFirstOpen: Boolean) {
         if (isFirstOpen) observable.update(QuoteUiState.Initial)
     }
-
 }

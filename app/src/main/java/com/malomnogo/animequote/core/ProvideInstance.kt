@@ -1,8 +1,6 @@
 package com.malomnogo.animequote.core
 
-import android.content.Context
 import com.malomnogo.animequote.data.Repository
-import com.malomnogo.animequote.data.cache.CacheDataSource
 import com.malomnogo.animequote.data.cloud.QuoteService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,7 +12,7 @@ interface ProvideInstance {
 
     fun provideRepository(): Repository
 
-    class Base(private val context: Context) : ProvideInstance {
+    class Base : ProvideInstance {
 
         override fun provideRepository(): Repository {
             val logging = HttpLoggingInterceptor().apply {
@@ -33,10 +31,7 @@ interface ProvideInstance {
                 .client(client)
                 .build()
 
-            return Repository.Base(
-                CacheDataSource.Base(context),
-                retrofit.create(QuoteService::class.java)
-            )
+            return Repository.Base(retrofit.create(QuoteService::class.java))
         }
     }
 

@@ -19,7 +19,7 @@ abstract class App : Application(), ProvideViewModel {
 }
 
 class ReleaseApp : App() {
-    override fun provideInstance() = ProvideInstance.Base(this)
+    override fun provideInstance() = ProvideInstance.Base()
 }
 
 class MockApp : App() {
