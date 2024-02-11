@@ -17,13 +17,6 @@ class MainActivity : AppCompatActivity(), ProvideViewModel {
         setContentView(binding.root)
 
         viewModel = viewModel(MainViewModel::class.java)
-
-        navigation = object : Navigation {
-            override fun navigate(screen: Screen) {
-                screen.show(binding.container.id, supportFragmentManager)
-            }
-        }
-
         viewModel.init(savedInstanceState == null)
     }
 

@@ -1,6 +1,7 @@
 package com.malomnogo.animequote
 
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions.*
@@ -11,6 +12,7 @@ import org.hamcrest.CoreMatchers.*
 class ErrorPage(private val message: String) : AbstractPage() {
 
     override fun checkVisible() {
+        super.checkVisible()
         onView(
             allOf(
                 withId(R.id.mainTextView),

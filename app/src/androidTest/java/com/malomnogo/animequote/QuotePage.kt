@@ -9,6 +9,7 @@ import org.hamcrest.CoreMatchers.*
 class QuotePage(private val quote: String) : AbstractPage() {
 
     override fun checkVisible() {
+        super.checkVisible()
         onView(
             allOf(
                 withId(R.id.mainTextView),
