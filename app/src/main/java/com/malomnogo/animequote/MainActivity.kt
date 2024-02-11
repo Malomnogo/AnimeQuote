@@ -52,6 +52,6 @@ interface UiCallBack {
 
     object Empty : UiCallBack {
 
-        override fun update(loadUiState: QuoteUiState) = Unit
+        override fun update(uiState: QuoteUiState) = Unit
     }
 }
