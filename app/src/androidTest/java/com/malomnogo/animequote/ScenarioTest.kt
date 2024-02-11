@@ -19,17 +19,28 @@ class ScenarioTest {
         initialPage.checkVisible()
         activityScenarioRule.scenario.recreate()
         initialPage.checkVisible()
-        initialPage.clickGetNewQuote()
+        initialPage.clickNext()
 
         val errorPage = ErrorPage(message = "No internet connection")
         errorPage.checkVisible()
         activityScenarioRule.scenario.recreate()
         errorPage.checkVisible()
-        errorPage.clickRetry()
+        errorPage.clickNext()
 
-        val quotePage = QuotePage(quote = "Fake quote text")
+        var quotePage = QuotePage(quote = "Fake quote text 1")
         quotePage.checkVisible()
         activityScenarioRule.scenario.recreate()
         quotePage.checkVisible()
+
+        quotePage.clickNext()
+        quotePage = QuotePage(quote = "Fake quote text 2")
+        quotePage.checkVisible()
+        activityScenarioRule.scenario.recreate()
+        quotePage.checkVisible()
+
+        quotePage.clickNext()
+        errorPage.checkVisible()
+        activityScenarioRule.scenario.recreate()
+        errorPage.checkVisible()
     }
 }
