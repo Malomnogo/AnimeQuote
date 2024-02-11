@@ -7,8 +7,8 @@ import com.malomnogo.animequote.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), ProvideViewModel {
 
-    private lateinit var navigation: Navigation
     private lateinit var viewModel: MainViewModel
+    private lateinit var uiCallBack: UiCallBack
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,12 +17,23 @@ class MainActivity : AppCompatActivity(), ProvideViewModel {
         setContentView(binding.root)
 
         viewModel = viewModel(MainViewModel::class.java)
+
+        uiCallBack = object : UiCallBack {
+            override fun update(uiState: QuoteUiState) {
+                uiState.show(binding)
+            }
+        }
+
+        binding.nextButton.setOnClickListener {
+            viewModel.load()
+        }
+
         viewModel.init(savedInstanceState == null)
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.startGettingUpdates(navigation)
+        viewModel.startGettingUpdates(uiCallBack)
     }
 
     override fun onPause() {
@@ -33,4 +44,14 @@ class MainActivity : AppCompatActivity(), ProvideViewModel {
 
     override fun <T : ViewModel> viewModel(clasz: Class<out T>): T =
         (application as ProvideViewModel).viewModel(clasz)
+}
+
+interface UiCallBack {
+
+    fun update(uiState: QuoteUiState)
+
+    object Empty : UiCallBack {
+
+        override fun update(uiState: QuoteUiState) = Unit
+    }
 }
