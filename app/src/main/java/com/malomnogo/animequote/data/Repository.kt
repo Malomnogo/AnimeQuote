@@ -1,18 +1,13 @@
 package com.malomnogo.animequote.data
 
-import com.malomnogo.animequote.data.cache.CacheDataSource
 import com.malomnogo.animequote.data.cloud.QuoteService
 import java.net.UnknownHostException
 
 interface Repository {
 
-    suspend fun saveQuote(text: String)
     suspend fun loadData(): LoadResult
 
-    class Base(
-        private val cacheDataSource: CacheDataSource.Save,
-        private val service: QuoteService
-    ) : Repository {
+    class Base(private val service: QuoteService) : Repository {
 
         override suspend fun loadData(): LoadResult = try {
             val response = service.load().execute()
@@ -24,17 +19,11 @@ interface Repository {
             else
                 LoadResult.Error("Service unavailable")
         }
-
-        override suspend fun saveQuote(text: String) {
-            cacheDataSource.saveQuote(value = text)
-        }
     }
 
     class FakeErrorThenTwiceSuccessThenError : Repository {
 
         private var position = 0
-
-        override suspend fun saveQuote(text: String) = Unit
 
         override suspend fun loadData(): LoadResult {
             val result =

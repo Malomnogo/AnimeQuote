@@ -2,7 +2,6 @@ package com.malomnogo.animequote.presentation
 
 interface UiObservable : UpdateUi, UpdateObserver {
 
-
     class Base : UiObservable {
 
         private var cache: QuoteUiState = QuoteUiState.Empty

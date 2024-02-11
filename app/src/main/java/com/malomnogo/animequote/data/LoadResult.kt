@@ -3,7 +3,6 @@ package com.malomnogo.animequote.data
 import com.malomnogo.animequote.presentation.QuoteUiState
 import com.malomnogo.animequote.presentation.UiObservable
 
-
 interface LoadResult {
 
     fun handle(observable: UiObservable)
