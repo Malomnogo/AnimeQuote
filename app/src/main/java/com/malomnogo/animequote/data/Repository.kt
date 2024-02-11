@@ -30,15 +30,11 @@ interface Repository {
         }
     }
 
-    class FakeErrorThenTwiceSuccessThenError(
-        private val cacheDataSource: CacheDataSource.Mutable
-    ) : Repository {
+    class FakeErrorThenTwiceSuccessThenError : Repository {
 
         private var position = 0
 
-        override suspend fun saveQuote(text: String) {
-            cacheDataSource.saveQuote(text)
-        }
+        override suspend fun saveQuote(text: String) = Unit
 
         override suspend fun loadData(): LoadResult {
             val result =
@@ -48,5 +44,4 @@ interface Repository {
             return result
         }
     }
-
 }
