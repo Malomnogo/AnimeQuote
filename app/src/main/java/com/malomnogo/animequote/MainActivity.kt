@@ -8,7 +8,7 @@ import com.malomnogo.animequote.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), ProvideViewModel {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var uiCallBack: UiCallBack
+    private lateinit var uiCallBack: UpdateUi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity(), ProvideViewModel {
 
         viewModel = viewModel(MainViewModel::class.java)
 
-        uiCallBack = object : UiCallBack {
+        uiCallBack = object : UpdateUi {
             override fun update(uiState: QuoteUiState) {
-                uiState.show(binding)
+                uiState.update(binding)
             }
         }
 
@@ -42,15 +42,15 @@ class MainActivity : AppCompatActivity(), ProvideViewModel {
 
     }
 
-    override fun <T : ViewModel> viewModel(clasz: Class<out T>): T =
-        (application as ProvideViewModel).viewModel(clasz)
+    override fun <T : ViewModel> viewModel(clazz: Class<out T>): T =
+        (application as ProvideViewModel).viewModel(clazz)
 }
 
-interface UiCallBack {
+interface UpdateUi {
 
     fun update(uiState: QuoteUiState)
 
-    object Empty : UiCallBack {
+    object Empty : UpdateUi {
 
         override fun update(uiState: QuoteUiState) = Unit
     }
