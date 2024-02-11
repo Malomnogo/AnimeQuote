@@ -89,14 +89,8 @@ class MainViewModelTest {
 private class FakeRepository : Repository {
 
     lateinit var result: LoadResult
-    private var cachedQuote = ""
 
     override suspend fun loadData() = result
-
-    override suspend fun saveQuote(text: String) {
-        cachedQuote = text
-    }
-
 }
 
 class FakeUiObservable : UiObservable {
